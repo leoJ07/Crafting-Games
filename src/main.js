@@ -3,4 +3,4 @@ var url = "main";
 
 alert("hello");
 
-//say.hello("joel");
+say.hello("joel");
