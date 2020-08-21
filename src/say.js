@@ -1,3 +1,3 @@
 export function hello(name){
-  alert("hello " + name);
+  return `hello ${name}`;
 }
