@@ -1,4 +1,4 @@
-//var url = "main"
+var url = "main";
 //import * as say from `./${url}.js`
 
 alert("hello");
