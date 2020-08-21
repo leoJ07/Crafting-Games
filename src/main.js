@@ -1,5 +1,5 @@
 var url = "main";
-//import * as say from `./${url}.js`
+import * as say from `./${url}.js`
 
 alert("hello");
 
