@@ -3,7 +3,7 @@ Checklist
 1. 
 */
 
-
+import {items} from "./main.js";
 
 const Inv_Slot = document.getElementsByClassName("Inventory");
 
@@ -41,7 +41,6 @@ var Int = {
     "this": document.getElementById("Int"),
     "block": document.getElementsByClassName("block")[1],
 };
-
 
 var interfases = [
     {
@@ -101,17 +100,6 @@ var interfases = [
         ],
     },
 ];
-var items = [
-    {
-        "name": "loog",
-        "path": "loog.png",
-        "data": {
-            "stack": 64,
-        },
-    },
-];
-
-
 
 export function mark_slot(element){
   if(mark === undefined){
