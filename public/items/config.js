@@ -49,7 +49,8 @@ export var items = [
             {
                 "items": ["loog", "", "", ""],
                 "interfase": "2x2_crafting",
-                "shaped": false,
+                "shaped": true,
+                "outputPlace": 5,
                 "count": 4,
             },
         ],

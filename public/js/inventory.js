@@ -40,6 +40,7 @@ var Inv_Items = [
 var Int = {
     "this": document.getElementById("Int"),
     "block": document.getElementsByClassName("block")[1],
+    "using": "",
 };
 
 var interfases = [
@@ -296,16 +297,53 @@ export function create_int_items(type, x, y, data){
   return div;
 }
 export function Pack_Upp_Interfase(name){
-  for(let i = 0; i < interfases.length; i++){
-      if(name === interfases[i].name){
-          for(let k = 0; k < interfases[i].items.length; k++){
-              create_int_items(interfases[i].items[k].type, interfases[i].items[k].x, interfases[i].items[k].y, interfases[i].items[k].data)
-          }
-          break;
-      }
-  }
+    Int.using = name;
+    for(let i = 0; i < interfases.length; i++){
+        if(name === interfases[i].name){
+            for(let k = 0; k < interfases[i].items.length; k++){
+                create_int_items(interfases[i].items[k].type, interfases[i].items[k].x, interfases[i].items[k].y, interfases[i].items[k].data)
+            }
+            break;
+        }
+    }
 }
 export function uppdate(){
+    for(let i = 0; i < items.length; i++){
+
+        for(let k = 0; k < items[i].recipes.length; k++){
+
+            if(items[i].recipes[k].interfase === Int.using){
+
+                if(items[i].recipes[k].shaped === true){
+                    let same = true;
+                    for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                        if(items[i].recipes[k].items[m] !== Int_Items[m].item){
+                            same = false;
+                        }
+                    }
+
+                    if(same){
+                        Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
+                        Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;
+
+                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                            if(items[i].recipes[k].items[m] !== ""){
+                                Int_Items[m].count--
+                            }
+                        }
+                    } else {
+                        Int_Items[items[i].recipes[k].outputPlace - 1].count = 0;
+                        Int_Items[items[i].recipes[k].outputPlace - 1].item = "";
+                    }
+                } else {
+                    same = true;
+                    console.log("resipe not shaped")
+                }
+            }
+        }
+    }
+
+
     for(let i = 0; i < Inv_Slot.length; i++){
         let path;
         for(let k = 0; k < items.length; k++){
