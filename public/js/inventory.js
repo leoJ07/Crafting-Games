@@ -22,7 +22,7 @@ var mark;
 var Int_Items = [];
 var Inv_Items = [
     {item: "loog", count: 40}, {item: "loog", count: 63}, {item: "", count: 0}, 
-    {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
+    {item: "plank", count: 4}, {item: "", count: 0}, {item: "", count: 0}, 
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
     
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
@@ -54,7 +54,7 @@ var interfases = [
                 "x": 10,
                 "y": 10,
                 "data": {
-                    "take": false,
+                    "take": true,
                     "place": true,
                 },
             },
@@ -102,6 +102,7 @@ var interfases = [
 ];
 
 export function mark_slot(element){
+    if(keyBoard["alt"]) console.log("alt prest")
   if(mark === undefined){
       time = 0;
       stopTimer = false;
@@ -285,7 +286,7 @@ export function create_int_items(type, x, y, data){
   div.style.position = "absolute";
   div.style.left = x + "px";
   div.style.top = y + "px";
-  Int_Items.push({ item: `loog`, count: 1, el: div, data: data,});
+  Int_Items.push({ item: ``, count: 0, el: div, data: data,});
   switch (type) {
       case 'Inv_Slot':
           div.className = "Inv_Slot";
