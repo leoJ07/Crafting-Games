@@ -1,12 +1,4 @@
-export var items = [
-    {
-        "name": "loog",
-        "path": "loog.png",
-        "data": {
-            "stack": 64,
-        },
-    },
-];
+export {items} from "../items/config.js";
 
 import * as Inventory from "./inventory.js";
 

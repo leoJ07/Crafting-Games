@@ -21,7 +21,7 @@ var stopTimer;
 var mark;
 var Int_Items = [];
 var Inv_Items = [
-    {item: "loog.png", count: 40}, {item: "loog.png", count: 63}, {item: "", count: 0}, 
+    {item: "loog", count: 40}, {item: "loog", count: 63}, {item: "", count: 0}, 
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
     
@@ -155,7 +155,7 @@ export function move_item(els, keys){
 
   if(els.to.item !== ""){
       for(let i = 0; i < items.length; i++){
-          if(items[i].path === els.to.item){
+          if(items[i].name === els.to.item){
               MaxMoveItems = items[i].data.stack;
               MaxStackItems = items[i].data.stack;
               break;
@@ -163,7 +163,7 @@ export function move_item(els, keys){
       }
   } else {
       for(let i = 0; i < items.length; i++){
-          if(items[i].path === els.from.item){
+          if(items[i].name === els.from.item){
               MaxMoveItems = items[i].data.stack;
               MaxStackItems = items[i].data.stack;
               break;
@@ -285,7 +285,7 @@ export function create_int_items(type, x, y, data){
   div.style.position = "absolute";
   div.style.left = x + "px";
   div.style.top = y + "px";
-  Int_Items.push({ item: `loog.png`, count: 1, el: div, data: data,});
+  Int_Items.push({ item: `loog`, count: 1, el: div, data: data,});
   switch (type) {
       case 'Inv_Slot':
           div.className = "Inv_Slot";
@@ -305,38 +305,51 @@ export function Pack_Upp_Interfase(name){
   }
 }
 export function uppdate(){
-  for(let i = 0; i < Inv_Slot.length; i++){
-      Inv_Slot[i].className = `Inv_Slot Inventory`;
-      if(Inv_Items[i].count > 1){
+    for(let i = 0; i < Inv_Slot.length; i++){
+        let path;
+        for(let k = 0; k < items.length; k++){
+            if(items[k].name === Inv_Items[i].item){
+                path = `../items/textures/item/${items[k].texture.item.path}`;
+                break;
+            }
+        }
+        Inv_Slot[i].className = `Inv_Slot Inventory`;
+        if(Inv_Items[i].count > 1){
+
+            Inv_Slot[i].innerHTML = `<img src="${path}" alt="" /><p><b>${Inv_Items[i].count}</b></p>`;
+            if(Inv_Items[i].item !== ""){
+                Inv_Slot[i].className += ` Inv_Slot_Img`;
+            }
+        } else if(Inv_Items[i].item !== ""){
           
-          Inv_Slot[i].innerHTML = `<img src="${Inv_Items[i].item}" alt="" /><p><b>${Inv_Items[i].count}</b></p>`;
-          if(Inv_Items[i].item !== ""){
-              Inv_Slot[i].className += ` Inv_Slot_Img`;
-          }
-      } else if(Inv_Items[i].item !== ""){
+            Inv_Slot[i].innerHTML = `<img src="${path}" alt="" /><p><b></b></p>`;
+            Inv_Slot[i].className += ` Inv_Slot_Img`;
           
-          Inv_Slot[i].innerHTML = `<img src="${Inv_Items[i].item}" alt="" /><p><b></b></p>`;
-          Inv_Slot[i].className += ` Inv_Slot_Img`;
+        } else {
           
-      } else {
-          
-          Inv_Slot[i].innerHTML = ``;
-          
+            Inv_Slot[i].innerHTML = ``; 
       }
   }
   
   
   for(let i = 0; i < Int_Items.length; i++){
-      Int_Items[i].el.className = `Inv_Slot`;
+        Int_Items[i].el.className = `Inv_Slot`;
+        let path;
+        for(let k = 0; k < items.length; k++){
+            if(items[k].name === Int_Items[i].item){
+                path = `../items/textures/item/${items[k].texture.item.path}`;
+                break;
+            }
+        }
       if(Int_Items[i].count > 1){
           
-          Int_Items[i].el.innerHTML = `<img src="${Int_Items[i].item}" alt="" /><p><b>${Int_Items[i].count}</b></p>`;
+          Int_Items[i].el.innerHTML = `<img src="${path}" alt="" /><p><b>${Int_Items[i].count}</b></p>`;
           if(Int_Items[i].item !== ""){
               Int_Items[i].el.className += ` Inv_Slot_Img`;
           }
       } else if(Int_Items[i].item !== ""){
           
-          Int_Items[i].el.innerHTML = `<img src="${Int_Items[i].item}" alt="" /><p><b></b></p>`;
+          Int_Items[i].el.innerHTML = `<img src="${path}" alt="" /><p><b></b></p>`;
           Int_Items[i].el.className += ` Inv_Slot_Img`;
           
       } else {
@@ -356,7 +369,7 @@ export function timer(){
 export function fillSlot(el){
   var maxStack;
   for(let i = 0; i < items.length; i++){
-    if(items[i].path === el.item){
+    if(items[i].name === el.item){
       maxStack = items[i].data.stack;
     }
   }
