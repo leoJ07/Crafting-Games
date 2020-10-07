@@ -1,6 +1,6 @@
 /*
 Checklist
-1. 
+1. fix so that you can't take an item from the recepy output if there are anather item that is going to it's place
 */
 
 import {items} from "./main.js";
@@ -175,27 +175,32 @@ export function move_item(els, keys){
   
   if(keys !== undefined){
     if(keys.shift.from){
-        MaxMoveItems = Math.ceil(els.from.count / 2);
+      MaxMoveItems = Math.ceil(els.from.count / 2);
     }
 
     if(keys.shift.to){
-        MaxMoveItems = 1;
+      MaxMoveItems = 1;
     }
   }
   
 
   if(els.to.plase === `Int`){
-      Move = Move && Int_Items[els.to.index].data.place ? true : false;
+    if(els.to.item !== els.from.item && (els.from.item !== "" && els.to.item !== "")){
+      Move = Move && Int_Items[els.to.index].data.take ? true : false;
+    }
+    Move = Move && Int_Items[els.to.index].data.place ? true : false;
   }
   
   if(els.from.plase === `Int`){
-      Move = Move && Int_Items[els.from.index].data.take ? true : false;
+    if(els.to.item !== els.from.item && (els.from.item !== "" && els.to.item !== "")){
+      Move = Move && Int_Items[els.from.index].data.place ? true : false;
+    }
+    Move = Move && Int_Items[els.from.index].data.take ? true : false;
   }
   
   if(Move){
       if(els.from.item !== ""){
           if(els.to.item === els.from.item){
-            
             //adding items to: els.to
             if(els.to.plase === `Inv`){
                 Inv_Items[els.to.index].count += els.from.count >= (MaxStackItems - els.to.count)? MaxStackItems - els.to.count >= MaxMoveItems? MaxMoveItems : MaxStackItems - els.to.count : MaxStackItems - els.to.count >= MaxMoveItems? MaxMoveItems : els.from.count;
@@ -274,12 +279,72 @@ export function move_item(els, keys){
                           }
                       }
                   }
+              } else {
+                if(els.from.plase === "Inv"){
+                  Inv_Items[els.from.index].item = els.to.item;
+                  Inv_Items[els.from.index].count = els.to.count;  
+                } else {
+                  Int_Items[els.from.index].item = els.to.item;
+                  Int_Items[els.from.index].count = els.to.count;
+                }
+
+                if(els.to.plase === "Inv"){
+                  Inv_Items[els.to.index].item = els.from.item;
+                  Inv_Items[els.to.index].count = els.from.count;  
+                } else {
+                  Int_Items[els.to.index].item = els.from.item;
+                  Int_Items[els.to.index].count = els.from.count;
+                }
               }
           }
       }
   }
   
+  uppRecipes(els, Move);
   uppdate();
+}
+export function uppRecipes(els, Move){
+  if(Move){
+    for(let i = 0; i < items.length; i++){
+          for(let k = 0; k < items[i].recipes.length; k++){
+              if(items[i].recipes[k].interfase === Int.using){
+                  if(items[i].recipes[k].shaped === true){
+                      if(els.from.plase === "Int" && els.from.index === items[i].recipes[k].outputPlace - 1){
+                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                          if(els.to.plase === "Int" && els.to.index === m){
+                            continue;
+                          }
+                          Int_Items[m].count--
+                          if(Int_Items[m].count <= 0){
+                            Int_Items[m].count = 0;
+                            Int_Items[m].item = "";
+                          }
+                        }
+                      }
+
+                      let same = true;
+                      for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                          if(items[i].recipes[k].items[m] !== Int_Items[m].item){
+                              same = false;
+                          }
+                      }
+
+                      if(same){
+                          Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
+                          Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;
+                            
+                      } else {
+                          Int_Items[items[i].recipes[k].outputPlace - 1].count = 0;
+                          Int_Items[items[i].recipes[k].outputPlace - 1].item = "";
+                      }
+                  } else {
+                      same = true;
+                      console.log("resipe not shaped")
+                  }
+              }
+          }
+    }
+  }
 }
 export function create_int_items(type, x, y, data){
   var div = document.createElement("div");
@@ -308,42 +373,6 @@ export function Pack_Upp_Interfase(name){
     }
 }
 export function uppdate(){
-    for(let i = 0; i < items.length; i++){
-
-        for(let k = 0; k < items[i].recipes.length; k++){
-
-            if(items[i].recipes[k].interfase === Int.using){
-
-                if(items[i].recipes[k].shaped === true){
-                    let same = true;
-                    for(let m = 0; m < items[i].recipes[k].items.length; m++){
-                        if(items[i].recipes[k].items[m] !== Int_Items[m].item){
-                            same = false;
-                        }
-                    }
-
-                    if(same){
-                        Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
-                        Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;
-
-                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
-                            if(items[i].recipes[k].items[m] !== ""){
-                                Int_Items[m].count--
-                            }
-                        }
-                    } else {
-                        Int_Items[items[i].recipes[k].outputPlace - 1].count = 0;
-                        Int_Items[items[i].recipes[k].outputPlace - 1].item = "";
-                    }
-                } else {
-                    same = true;
-                    console.log("resipe not shaped")
-                }
-            }
-        }
-    }
-
-
     for(let i = 0; i < Inv_Slot.length; i++){
         let path;
         for(let k = 0; k < items.length; k++){
