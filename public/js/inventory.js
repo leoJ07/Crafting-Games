@@ -305,6 +305,7 @@ export function move_item(els, keys){
 }
 export function uppRecipes(els, Move){
   if(Move){
+    console.log("uppdating recipes")
     for(let i = 0; i < items.length; i++){
           for(let k = 0; k < items[i].recipes.length; k++){
               if(items[i].recipes[k].interfase === Int.using){
