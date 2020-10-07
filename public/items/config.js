@@ -46,6 +46,7 @@ export var items = [
             "plasable": true,
         },
         "recipes": [
+            {},
             {
                 "items": ["loog", "", "", ""],
                 "interfase": "2x2_crafting",
