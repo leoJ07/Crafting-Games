@@ -1,6 +1,6 @@
 /*
 Checklist
-1. fix so that you can't take an item from the recepy output if there are anather item that is going to it's place
+1. 
 */
 
 import {items} from "./main.js";
@@ -16,13 +16,16 @@ document.addEventListener("keyup", (e) => {
     keyBoard[e.key] = false;
 });
 
+var resNotSame = {
+  same: true,
+};
 var time = 0;
 var stopTimer;
 var mark;
 var Int_Items = [];
 var Inv_Items = [
     {item: "loog", count: 40}, {item: "loog", count: 63}, {item: "", count: 0}, 
-    {item: "plank", count: 4}, {item: "", count: 0}, {item: "", count: 0}, 
+    {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
     
     {item: "", count: 0}, {item: "", count: 0}, {item: "", count: 0}, 
@@ -305,23 +308,11 @@ export function move_item(els, keys){
 }
 export function uppRecipes(els, Move){
   if(Move){
+    resNotSame.same = true;
     for(let i = 0; i < items.length; i++){
           for(let k = 0; k < items[i].recipes.length; k++){
               if(items[i].recipes[k].interfase === Int.using){
                   if(items[i].recipes[k].shaped === true){
-                      if(els.from.plase === "Int" && els.from.index === items[i].recipes[k].outputPlace - 1){
-                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
-                          if(els.to.plase === "Int" && els.to.index === m){
-                            continue;
-                          }
-                          Int_Items[m].count--
-                          if(Int_Items[m].count <= 0){
-                            Int_Items[m].count = 0;
-                            Int_Items[m].item = "";
-                          }
-                        }
-                      }
-
                       let same = true;
                       for(let m = 0; m < items[i].recipes[k].items.length; m++){
                           if(items[i].recipes[k].items[m] !== Int_Items[m].item){
@@ -330,12 +321,33 @@ export function uppRecipes(els, Move){
                       }
 
                       if(same){
+                        if(els.from.plase === "Int" && els.from.index === items[i].recipes[k].outputPlace - 1){
+                          for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                            if(els.to.plase === "Int" && els.to.index === m){
+                              continue;
+                            }
+                            Int_Items[m].count--
+                            if(Int_Items[m].count <= 0){
+                              Int_Items[m].count = 0;
+                              Int_Items[m].item = "";
+                            }
+                          }
+                        }
+                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
+                          if(items[i].recipes[k].items[m] !== Int_Items[m].item){
+                            same = false;
+                          }
+                        }
+                        if(same){
+                          resNotSame.same = false;
+                          resNotSame.res = {
+                            i: i,
+                            k: k,
+                          }
                           Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
                           Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;
-                            
-                      } else {
-                          Int_Items[items[i].recipes[k].outputPlace - 1].count = 0;
-                          Int_Items[items[i].recipes[k].outputPlace - 1].item = "";
+                        }
+                        
                       }
                   } else {
                       same = true;
@@ -343,6 +355,12 @@ export function uppRecipes(els, Move){
                   }
               }
           }
+    }
+    if(resNotSame.same){
+      if(resNotSame.res !== undefined){
+        Int_Items[items[resNotSame.res.i].recipes[resNotSame.res.k].outputPlace - 1].count = 0;
+        Int_Items[items[resNotSame.res.i].recipes[resNotSame.res.k].outputPlace - 1].item = "";
+      }
     }
   }
 }
