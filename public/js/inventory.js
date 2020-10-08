@@ -1,6 +1,6 @@
 /*
 Checklist
-1. 
+1. fix so that you cant dublicate items vhen crafting an item and moving it directly into the crafting interfase. 
 */
 
 import {items} from "./main.js";
