@@ -321,33 +321,13 @@ export function uppRecipes(els, Move){
                       }
 
                       if(same){
-                        if(els.from.plase === "Int" && els.from.index === items[i].recipes[k].outputPlace - 1){
-                          for(let m = 0; m < items[i].recipes[k].items.length; m++){
-                            if(els.to.plase === "Int" && els.to.index === m){
-                              continue;
-                            }
-                            Int_Items[m].count--
-                            if(Int_Items[m].count <= 0){
-                              Int_Items[m].count = 0;
-                              Int_Items[m].item = "";
-                            }
-                          }
+                        resNotSame.same = false;
+                        resNotSame.res = {
+                          i: i,
+                          k: k,
                         }
-                        for(let m = 0; m < items[i].recipes[k].items.length; m++){
-                          if(items[i].recipes[k].items[m] !== Int_Items[m].item){
-                            same = false;
-                          }
-                        }
-                        if(same){
-                          resNotSame.same = false;
-                          resNotSame.res = {
-                            i: i,
-                            k: k,
-                          }
-                          Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
-                          Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;
-                        }
-                        
+                        Int_Items[items[i].recipes[k].outputPlace - 1].count = items[i].recipes[k].count;
+                        Int_Items[items[i].recipes[k].outputPlace - 1].item = items[i].name;                        
                       }
                   } else {
                       same = true;
@@ -360,6 +340,18 @@ export function uppRecipes(els, Move){
       if(resNotSame.res !== undefined){
         Int_Items[items[resNotSame.res.i].recipes[resNotSame.res.k].outputPlace - 1].count = 0;
         Int_Items[items[resNotSame.res.i].recipes[resNotSame.res.k].outputPlace - 1].item = "";
+      }
+    }
+    if(els.from.plase === "Int" && els.from.index === items[resNotSame.res.i].recipes[resNotSame.res.k].outputPlace - 1){
+      for(let m = 0; m < items[resNotSame.res.i].recipes[resNotSame.res.k].items.length; m++){
+        if(els.to.plase === "Int" && els.to.index === m){
+          continue;
+        }
+        Int_Items[m].count--
+        if(Int_Items[m].count <= 0){
+          Int_Items[m].count = 0;
+          Int_Items[m].item = "";
+        }
       }
     }
   }
