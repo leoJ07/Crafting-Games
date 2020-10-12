@@ -21,7 +21,13 @@ export var items = [
             "plasable": true,
         },
         "recipes": [
-            
+            {
+                "items": ["loog", "loog", "", ""],
+                "interfase": "2x2_crafting",
+                "shaped": false,
+                "outputPlace": 5,
+                "count": 4,
+            },
         ],
     },
     {
@@ -103,17 +109,10 @@ export var items = [
                 "interfase": "2x2_crafting",
                 "shaped": true,
                 "outputPlace": 5,
-                "count": 2,
+                "count": 4,
             },
             {
                 "items": ["", "plank", "plank", ""],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 2,
-            },
-            {
-                "items": ["plank", "plank", "plank", "plank"],
                 "interfase": "2x2_crafting",
                 "shaped": true,
                 "outputPlace": 5,
@@ -121,4 +120,3 @@ export var items = [
             },
         ],
     },
-];
