@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static(__dirname + "/public/"));
 
 app.get("/", (req, res) => {
-    res.send("menu");
+    res.redirect("/menu");
 })
 
 app.get("/menu", (req, res) => {
@@ -19,7 +19,7 @@ app.get("/menu", (req, res) => {
 });
 
 app.get("/game", (req, res) => {
-    fs.readFile("../index.html", (err, data) => {
+    fs.readFile("index.html", (err, data) => {
         if(err) {
             console.log(err)
         } else {
