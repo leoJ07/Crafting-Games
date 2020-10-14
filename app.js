@@ -8,7 +8,6 @@ app.get("/", (req, res) => {
 
 app.get("/game", (req, res) => {
     res.sendFile("./public/game.html", {root: __dirname});
-    res.sendFile("./public/css/main.css", {root: __dirname});
 });
 
 app.get("/menu", (req, res) => {
