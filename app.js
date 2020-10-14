@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/game", (req, res) => {
-    res.sendFile("./public/index.html", {root: __dirname});
+    res.sendFile("./public/game.html", {root: __dirname});
 });
 
 app.get("/menu", (req, res) => {
