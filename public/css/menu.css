@@ -1,0 +1,50 @@
+#title {
+  font-size: 500%;
+  text-align: center;
+  text-shadow: 3px 3px #383737;
+  margin-top: 90px;
+  margin-bottom: 125px;
+}
+
+#play {
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  left: calc(50% - 25%/2);
+  top: 295px;
+  width: 25%;
+  height: 50px;
+  border: 3px solid black;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 200%;
+}
+
+#setings {
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  left: calc(50% - 25%/2);
+  top: 370px;
+  width: 25%;
+  height: 50px;
+  border: 3px solid black;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 200%;
+}
+
+#how_to_play {
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  left: calc(50% - 25%/2);
+  top: 440px;
+  width: 25%;
+  height: 50px;
+  border: 3px solid black;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 200%;
+  margin-bottom: 20px;
+}
