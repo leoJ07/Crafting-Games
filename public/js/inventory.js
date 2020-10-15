@@ -14,6 +14,11 @@ document.addEventListener("keydown", (e) => {
 });
 document.addEventListener("keyup", (e) => {
     keyBoard[e.key] = false;
+    switch(e.key){
+        case "e":
+            Inventory.style.display = "block";
+            break;
+    }
 });
 
 var resNotSame = {
