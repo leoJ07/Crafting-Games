@@ -20,15 +20,6 @@ export var items = [
             "stack": 64,
             "plasable": true,
         },
-        "recipes": [
-            {
-                "items": ["loog", "loog", "", ""],
-                "interfase": "2x2_crafting",
-                "shaped": false,
-                "outputPlace": 5,
-                "count": 4,
-            },
-        ],
     },
     {
         "name": "plank",
@@ -51,36 +42,6 @@ export var items = [
             "stack": 64,
             "plasable": true,
         },
-        "recipes": [
-            {
-                "items": ["loog", "", "", ""],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-            {
-                "items": ["", "loog", "", ""],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-            {
-                "items": ["", "", "loog", ""],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-            {
-                "items": ["", "", "", "loog"],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-        ],
     },
     {
         "name": "coding",
@@ -103,21 +64,5 @@ export var items = [
             "stack": 64,
             "plasable": true,
         },
-        "recipes": [
-            {
-                "items": ["plank", "", "", "plank"],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-            {
-                "items": ["", "plank", "plank", ""],
-                "interfase": "2x2_crafting",
-                "shaped": true,
-                "outputPlace": 5,
-                "count": 4,
-            },
-        ],
     },
 ]
