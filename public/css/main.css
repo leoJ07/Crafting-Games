@@ -12,6 +12,7 @@
 }
 
 #Inventory {
+    display: none;
     position: absolute;
     background-color: #4d1000;
     border-radius: 40px;
@@ -107,7 +108,3 @@
 #Inv .block table tr:last-child td{
     padding-top: 10px;
 }
-
-
-
-
