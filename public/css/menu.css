@@ -48,3 +48,9 @@
   font-size: 200%;
   margin-bottom: 20px;
 }
+
+#verson {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
