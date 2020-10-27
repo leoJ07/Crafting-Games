@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./css/setings.css">
 </head>
 <body>
-  <h1>Comming Soon!!!</h1>
-  <a href="/"><h3>Back</h3></a>
+  <h1 id="title">Setings</h1>
+  <a href="/"><button id="back_button">Back</button></a>
+  <button id="Reset_button" onclick="reset()">Reset</button>
+  <a href="/"><button id="Save_button" onclick="saveData()">Save</button></a>
+  <div id="seting_box">
+    <div class="setings">Open Inventory<div id="key">e</div></div>
+    <div class="setings">Open Resorses<div id="key">r</div></div>
+    <div class="setings">Open Interfase Edit<div id="key">q</div></div>
+    <div class="setings">Open Interfase<div id="key">f</div></div>
+  </div>
+  <div id="change_key">
+    <h2>Press an key to change to it</h2>
+  </div>
+  <script src="./js/setings.js"></script>
 </body>
 </html>
