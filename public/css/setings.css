@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+}
+
+#title {
+  font-size: 70px;
+  text-align: center;
+  text-shadow: 3px 3px #383737;
+}
+
+#seting_box {
+  position: absolute;
+  left: 25%;
+  border: 3px solid black;
+  width: 50%;
+  height: 60%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 25px;
+}
+
+#seting_box div #key{
+  position: absolute;
+  top: -5px;
+  right: 30px;
+}
+
+#seting_box div {
+  position: relative;
+  margin: 5px;
+  font-size: 50px;
+  border-radius: 25px;
+}
+
+#seting_box div:hover {
+  background-color: rgb(129, 127, 127);
+}
+
+#back_button {
+  position: absolute;
+  top: 100px;
+  left: 400px;
+  width: 100px;
+  height: 50px;
+  font-size: 25px;
+}
+
+#Reset_button {
+  position: absolute;
+  top: 100px;
+  left: 950px;
+  width: 100px;
+  height: 50px;
+  font-size: 25px;
+}
+
+#Save_button {
+  position: absolute;
+  top: 100px;
+  left: 530px;
+  width: 100px;
+  height: 50px;
+  font-size: 25px;
+}
+
+#change_key {
+  position: absolute;
+  display: none;
+  text-align: center;
+  z-index: 190;
+  background-color: gray;
+  height: calc(100% + 1px);
+  width: 100%;
+  top: 0;
+}
+
+#change_key h2{
+  margin-top: 320px;
+}
